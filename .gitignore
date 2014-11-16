@@ -1,0 +1,7 @@
+composer.phar
+composer.lock
+vendor/*
+test/cache
+test/resources
+test/views
+*.sublime-*

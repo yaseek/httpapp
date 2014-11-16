@@ -1,0 +1,9 @@
+{
+    "name": "yaseek/httpapp",
+    "description": "API for creating simple HTTP Application",
+    "homepage": "https://github.com/yaseek/httpapp",
+    "license": "MIT",
+    "autoload": {
+        "classmap": ["lib/"]
+    }
+}
