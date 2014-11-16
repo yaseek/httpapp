@@ -16,7 +16,7 @@ class Response {
 
     public function headers($data) {
         foreach ($data as $key => $value) {
-            header(join(': ', [$key, $value]));
+            header(join(': ', array($key, $value)));
         }
     }
     
