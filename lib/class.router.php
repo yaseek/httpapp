@@ -3,12 +3,12 @@ namespace Yaseek;
 
 class HTTPRouter {
 
-    private function processResources($dir) {
+    private static function processResources($dir) {
         if ($dh = opendir($dir)) {
             while (($file = readdir($dh)) !== false) {
                 if (strpos($file, '.') !== 0) {
                     if (filetype($dir . '/' . $file) === 'dir') {
-                        $this->processResources($dir . '/' . $file);
+                        self::processResources($dir . '/' . $file);
                     } else {
                         include $dir . '/' . $file;
                     }
@@ -18,12 +18,18 @@ class HTTPRouter {
         }
     }
 
-    public function __construct($app, $options) {
+    public static function start($app, $options) {
         $resourceDir = $options['resources'];
 
         if (is_dir($resourceDir)) {
-            $this->processResources($resourceDir);
+            self::processResources($resourceDir);
         }
     }
 
+    public static function stop($app) {
+        if (!isset($app->invocation)) {
+            $app->response->status(404);
+            include dirname( __DIR__ ) . '/view/404.php';
+        }
+    }
 }
