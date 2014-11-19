@@ -8,12 +8,18 @@ class HTTPApplication {
 
     public $request;
     public $response;
+
+    private $invocation;
     
     public function __construct() {
         
         $this->request = new Request();
         $this->response = new Response();
         
+    }
+
+    public function invoked () {
+        return boolval($this->invocation);
     }
 
     private function matchExpression ($exp) {

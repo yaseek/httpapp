@@ -26,10 +26,13 @@ class HTTPRouter {
         }
     }
 
-    public static function stop($app) {
-        if (!isset($app->invocation)) {
-            $app->response->status(404);
-            include dirname( __DIR__ ) . '/view/404.php';
+    public static function stop($app, $status = 404, $dir = NULL) {
+        if (!$app->invoked()) {
+            $app->response->status($status);
+            if (!$dir) {
+                $dir = dirname( __DIR__ ) . '/view';
+            }
+            include $dir . '/' . $status . '.php';
         }
     }
 }
